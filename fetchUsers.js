@@ -1,4 +1,4 @@
-// Импортируем node-fetch для Node.js (если используете Node.js)
+// Импортируем node-fetch для Node.js 
 const fetch = require('node-fetch');
 
 async function fetchUsers() {
