@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пользователи JSONPlaceholder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Список пользователей</h1>
+  <button id="fetchButton">Загрузить пользователей</button>
+  
+  <!-- Контейнер для отображения списка пользователей -->
+  <div id="userList"></div>
+
+   <script type="module">
+    // Импорт функции fetchUsers
+     import { fetchUsers } from './fetchUsers.js';
+    async function displayUsers() {
+      try {
+        // Вызов функции и получение данных
+        const users = await fetchUsers();
+       
+        // Получаем элемент, куда будут добавляться имена пользователей
+        const userList = document.getElementById('userList');
+        
+       // Добавляем каждого пользователя в список
+       users.forEach(user => {
+       const userDiv = document.createElement('div');
+       userDiv.className = 'user';
+       userDiv.textContent = user.name;
+       userList.appendChild(userDiv);
+       console.log(user.name)
+      });
+      } catch (error) {
+        console.error('Ошибка при отображении пользователей:', error);
+      }
+    }
+       document.getElementById('fetchButton').addEventListener('click', async () => {
+      const userList = document.getElementById('userList');
+      userList.innerHTML = ''; // Очищаем список перед добавлением новых элементов 
+      });
+    // Добавляем обработчик события для кнопки
+    document.getElementById('fetchButton').addEventListener('click', displayUsers);
+  </script>
+</body>
+</html>
